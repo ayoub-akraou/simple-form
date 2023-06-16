@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  font-size: 65%;
+}
+
+@layer base {
+  #app {
+    @apply font-sans bg-emerald-400 flex justify-center items-center min-h-screen;
+  }
+}

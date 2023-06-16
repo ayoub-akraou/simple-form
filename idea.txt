@@ -1,0 +1,8 @@
+[ X ] clean the folders from unwanted default setup
+[ X ] add tailwindcss to the project
+[ X ] add fonts and custom colors... to tailwindcss
+[ X ] decide the components structure
+[ > ] create each component and add style then add logic
+[   ] 
+
+i want to set the color of icons inside the inputs
