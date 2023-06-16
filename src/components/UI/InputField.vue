@@ -17,10 +17,10 @@
 
 <script>
 export default {
-  props: ['type', 'name', 'placeholder', 'isActive'],
+  props: ['type', 'name', 'placeholder', 'isActive', 'id'],
   methods: {
     toggle() {
-      this.$emit("toggle")
+      this.$emit("toggle", this.id)
     }
   }
 }

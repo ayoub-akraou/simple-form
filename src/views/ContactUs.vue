@@ -5,56 +5,35 @@
       action="./index.php"
       method="POST"
       class="p-8 flex flex-wrap justify-between gap-y-12 gap-x-8 text-gray-800"
+      @submit.prevent=""
     >
       <InputField
-        type="text"
-        name="name"
-        placeholder="Enter your name"
-        @toggle="toggle('isActiveName')"
-        :isActive="isActiveName"
-        ><span :class="['material-symbols-outlined', 'icon', { '!text-emerald-400': isActiveName }]">
-          person
+        v-for="data in InputsData"
+        :key="data.id"
+        :id="data.id"
+        :type="data.type"
+        :name="data.name"
+        :placeholder="data.placeholder"
+        @toggle="toggle"
+        :isActive="data.isActive"
+        ><span
+          :class="['material-symbols-outlined', 'icon', { '!text-emerald-400': data.isActive }]"
+        >
+          {{ data.icon }}
         </span>
       </InputField>
-      <InputField
-        type="email"
-        name="email"
-        placeholder="Enter your email"
-        @toggle="toggle('isActiveEmail')"
-        :isActive="isActiveEmail"
+      <BaseTextarea
+        placeholder="Enter your message"
+        @toggle="() => this.isActiveMessage = !this.isActiveMessage"
+        :isActive="isActiveMessage"
+      >
+        <span
+          :class="['material-symbols-outlined', 'icon', { '!text-emerald-400': isActiveMessage }]"
         >
-        <span :class="['material-symbols-outlined', 'icon', { '!text-emerald-400': isActiveEmail }]">
-          mail
+          chat
         </span>
-      </InputField>
-      <InputField
-        type="tel"
-        name="number_phone"
-        placeholder="Enter your number phone"
-        @toggle="toggle('isActivePhone')"
-        :isActive="isActivePhone"
-        ><span
-        :class="['material-symbols-outlined', 'icon', { '!text-emerald-400': isActivePhone }]"
-        >
-        phone
-        </span></InputField
-      >
-      <InputField
-        type="url"
-        name="website"
-        placeholder="Enter your website"
-        @toggle="toggle('isActiveWebsite')"
-        :isActive="isActiveWebsite"
-        ><span
-        :class="['material-symbols-outlined', 'icon', { '!text-emerald-400': isActiveWebsite }]"
-        >
-        language
-        </span></InputField
-      >
-      <BaseTextarea placeholder="Enter your message" @toggle="toggle('isActiveMessage')" :isActive="isActiveMessage">
-        <span :class="['material-symbols-outlined', 'icon', { '!text-emerald-400': isActiveMessage }]"> chat </span>
       </BaseTextarea>
-      <BaseButton @click.prevent>Send Message</BaseButton>
+      <BaseButton>Send Message</BaseButton>
     </form>
   </div>
 </template>
@@ -67,17 +46,51 @@ import BaseButton from '../components/UI/BaseButton.vue'
 
 export default {
   components: {
-     BaseButton,
+    BaseButton,
     BaseHeader,
     InputField,
     BaseTextarea
   },
   data() {
     return {
-      isActiveName: false,
-      isActiveEmail: false,
-      isActivePhone: false,
-      isActiveWebsite: false,
+      InputsData: [
+        {
+          id: 1,
+          type: 'text',
+          name: 'full_name',
+          placeholder: 'Enter your name',
+          icon: 'person',
+          isActive: false,
+          value:""
+        },
+        {
+          id: 2,
+          type: 'email',
+          name: 'email',
+          placeholder: 'Enter your email',
+          icon: 'mail',
+          isActive: false,
+          value: "",
+        },
+        {
+          id: 3,
+          type: 'tel',
+          name: 'number_phone',
+          placeholder: 'Enter your number phone',
+          icon: 'phone',
+          isActive: false,
+          value: "",
+        },
+        {
+          id: 4,
+          type: 'text',
+          name: 'website',
+          placeholder: 'Enter your website',
+          icon: 'language',
+          isActive: false,
+          value: "",
+        }
+      ],
       isActiveMessage: false,
     }
   },
@@ -86,7 +99,9 @@ export default {
       const element = this.InputsData.find(e => e.id === id);
       element.isActive = !element.isActive;
     },
-    toggle
+  },
+  mounted() {
+    console.log(this.$refs);
   }
 }
 </script>
