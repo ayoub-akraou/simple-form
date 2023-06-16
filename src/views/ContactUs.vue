@@ -82,10 +82,11 @@ export default {
     }
   },
   methods: {
-    toggle(isActive) {
-      this[isActive] = !this[isActive];
-      console.log(this[isActive]);
-    }
+    toggle(id) {
+      const element = this.InputsData.find(e => e.id === id);
+      element.isActive = !element.isActive;
+    },
+    toggle
   }
 }
 </script>
